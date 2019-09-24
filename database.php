@@ -6,6 +6,8 @@ $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
 
+$link = mysqli_connect($host, $user, $pass, $db);
+
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

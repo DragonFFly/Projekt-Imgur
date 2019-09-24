@@ -2,7 +2,6 @@
     include_once './header.php';
 ?>
 
-<a href="new_post.php" class="button alt">New Post</a>
 <form></form>
 
     <section class="thumbnails">

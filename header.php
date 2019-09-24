@@ -23,21 +23,23 @@
 				<!-- Header -->
 					<header id="header">
                         
-						<img src="images/imgur.png" alt="logo">
+						<a href="index.php"><img src="images/imgur.png" alt="logo"></a>
+						<a href="new_post.php" class="button alt">New Post</a>
                         <?php
                             //če je prijavljen - naj bo link na logout in prikaže ime , če ne login 
                             if (isset($_SESSION['user_id'])) {
+								$user_id = $_SESSION['user_id'];
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
                                 $username = mysqli_fetch_array(mysqli_query($link, $query));                                                              
-                                echo '<h3>'.$username['ime'].'</h3>';
+                                echo '<h3>'.$username['ime'].'</h3><hr>';
                                 echo '<a href="logout.php" class="button alt">Sign Out</a>';
                                 echo '<a href="profile.php" class="button alt">Profile</a>';
-                                echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Išči"></form>';
+                                echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Search"></form>';
                             }
                             else {
-                                echo '<a href="login.php" class="button alt">Sign In</a>';
+                                echo '<hr><a href="login.php" class="button alt">Sign In</a>';
 								echo '<a href="registration.php" class="button alt">Sign Up</a>';
-                                echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Išči"></form>';
+                                echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Search"></form>';
                             }
 
                         ?>

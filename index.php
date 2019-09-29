@@ -1,8 +1,10 @@
 <?php //glavna stran 
     include_once './header.php';
+
+    include_once './post_load.php'
 ?>
 
-<form></form>
+
 
     <section class="thumbnails">
         <div>

@@ -1,8 +1,11 @@
-<?php
-    include_once './header.php';
-?>
-
-<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<html lang="en">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -19,15 +22,5 @@
         console.log("ID Token: " + id_token);
       }
     </script>
-
-<h1>Prijava</h1>
-
-<form action="login_check.php" method="post">
-    <input type="text" name="name" placeholder="Name" required="required" /><br>
-    <input type="password" name="pass" placeholder="Password" required="required" /><br>
-    <input type="submit" value="Login" />
-</form>
-
-<?php
-    include_once './footer.php';
-?>
+  </body>
+</html>

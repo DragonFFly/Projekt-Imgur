@@ -23,12 +23,7 @@ if(isset($_POST["submit"])) {
                 $uploadOk = 0;
             }
             else{//če je vse ok, uploada datoteko
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-                    echo '<a class="button alt">'.$target_file.'</a>';
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
+                $uploadOk = 1;
             }
         }
     } 
@@ -43,6 +38,7 @@ $file_upload = $target_dir . $target_file;
     <input type="text" name="title" placeholder="Insert title" required="required"/>
     <input type="text" name="descr" placeholder="Insert description"/>
     <input type="hidden" name="file" value="<?php $file_upload ?>"/>
+    <input type="hidden" name="target" value="<?php $target_file ?>"/>
     <?php
     //---------DODAJ-TAG-INPUT--------------------
     if($uploadOk=1){// če je datoteka uploadana se lahko posta, drugače pa pa ne

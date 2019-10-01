@@ -1,7 +1,15 @@
 <?php
-include_once './session.php';
 
-$query = "SELECT *  , COUNT(*) as posts FROM posts";
+if(ISSET($tag_id)){
+    $query = "SELECT *  , COUNT(*) as posts FROM posts p INNER JOIN posts_tags r ON p.id = r.post_id WHERE (r.tag_id = $tag_id)";
+}
+else if(ISSET($user)){
+    $query = "SELECT *  , COUNT(*) as posts FROM posts";
+}
+else{
+    $query = "SELECT *  , COUNT(*) as posts FROM posts";
+}
+
 $result = mysqli_query($link, $query);
 $posts = mysqli_fetch_array($result);
 
@@ -25,15 +33,15 @@ $div = 1;
 while ($div > 0){ //ponovi za vsak div
     echo '<div>';
     if($div == 1){ //izbere število postov v enem div-u
-        $ps = $post1;
+        $a = $post1;
     }
     else if($div == 2){
-        $ps = $post2;
+        $a = $post2;
     }
     else if($div == 3){
-        $ps = $post3;
+        $a = $post3;
     }
-    while($ps > 0){//ponovi za vsak post v divu
+    while($a > 0){//ponovi za vsak post v divu
         
         //-------------------------------------------prikaže podatke in sliko post-a--------
         while ($post = mysqli_fetch_array($result)){
@@ -46,8 +54,8 @@ while ($div > 0){ //ponovi za vsak div
             echo '<h3>'.$post['title'].'</h3>'
             .'</a>';
         }
-        //---------------------------------------------------------------
-        $ps = $ps - 1;
+        //----------------------------------------------------------------------------------
+        $a = $a - 1;
     }
     echo '</div>';
     $div = $div + 1;

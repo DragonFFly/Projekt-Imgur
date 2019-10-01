@@ -16,6 +16,11 @@ if (!empty($name) && !empty($email) &&
             . "VALUES (?,?,?,0,0)";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$name,$email,$pass]);
+
+    $user = mysqli_fetch_array(mysqli_query($link, "SELECT id FROM users WHERE ime = '$name' AND mail='$email'"));
+    $user_id = $user['id'];
+    $query = "INSERT INTO images (user_id , url)"
+            . "VALUES($user_id, 'images/user.png')";
     
     header("Location: login.php");
 }

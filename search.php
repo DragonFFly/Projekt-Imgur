@@ -5,6 +5,7 @@ echo $search;
 $query = "SELECT * FROM posts  WHERE naslov LIKE '%$search%' OR opis LIKE '%$search%'";
 $result1 = mysqli_query($link, $query);
 echo '<table>';
+//--------------------------------------------------prikaz postov-----------------
 while($post = mysqli_fetch_array($result1)){
         $post_id = $post['id'];
         $query = "SELECT * FROM images i INNER JOIN posts p ON i.post_id = p.id WHERE i.post_id = $post_id ";
@@ -16,11 +17,13 @@ while($post = mysqli_fetch_array($result1)){
         .'<td>'.$post['naslov'].'</td><td>'.$post['ogledi'].' views</td>'
         .'<td>'.$post['tocke'].' points</td></tr>';
     }
+//---------------------------------------------------------------------------------
 echo '</table>';
 
 $query = "SELECT * FROM users  WHERE ime LIKE '%$search%'";
 $result1 = mysqli_query($link, $query);
 echo '<table>';
+//----------------------------------------------------prikaz uporabnikov-----------
 while($user = mysqli_fetch_array($result1)){
         $user_id = $user['id'];
         $query = "SELECT * FROM images i INNER JOIN users u ON i.user_id = u.id WHERE i.user_id = $user_id ";
@@ -31,17 +34,20 @@ while($user = mysqli_fetch_array($result1)){
         . '<tr><td><a href="user.php?id='.$user_id.'"><img src="'.$image2['url'].'"></a></td>'
         .'<td>'.$user['ime'].'</td><td>'.$user['tocke'].' points</td></tr>';
     }
+//---------------------------------------------------------------------------------
 echo '</table>';
 
 $query = "SELECT * FROM tags  WHERE naslov LIKE '%$search%' OR opis LIKE '%$search%'";
 $result1 = mysqli_query($link, $query);
 echo '<table>';
+//-----------------------------------------------------prikaz tagov----------------
 while($tag = mysqli_fetch_array($result1)){
         $tag_id = $tag['id'];
         
         echo '<tr><td>Tags</td></tr>'
-        . '<tr><td>'.$tag['naslov'].'</td></tr>';
+        . '<tr><a href = "tag.php?id='.$tag_id.'"><td>'.$tag['naslov'].'</td></a></tr>';
     }
+//---------------------------------------------------------------------------------
 echo '</table>';
 
 include_once './footer.php';

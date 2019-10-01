@@ -23,7 +23,15 @@ if(isset($_POST["submit"])) {
                 $uploadOk = 0;
             }
             else{//če je vse ok, uploada datoteko
-                $uploadOk = 1;
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                    echo '<a class="button alt">'.$target_file.'</a>';
+                    header("Location: index.php");
+                    die();
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                    header("Location: new_post.php");
+                }
             }
         }
     } 
@@ -39,8 +47,19 @@ $file_upload = $target_dir . $target_file;
     <input type="text" name="descr" placeholder="Insert description"/>
     <input type="hidden" name="file" value="<?php $file_upload ?>"/>
     <input type="hidden" name="target" value="<?php $target_file ?>"/>
-    <?php
-    //---------DODAJ-TAG-INPUT--------------------
+    <?php//--------------------TAG-----------
+
+    echo '<select name="tags" multiple>';
+
+    $query = "SELECT * FROM tags";
+    $result = mysqli_query($link,$query);
+
+    while($tag = mysqli_fetch_array($result)){
+    echo '<option value="'.$tag['id'].'">'.$tag['naslov'].'</option>';
+    }
+    echo '</select>';
+
+    //----------------------------------------
     if($uploadOk=1){// če je datoteka uploadana se lahko posta, drugače pa pa ne
         echo '<input type="submit" name="submit" value="post"/>';
     }

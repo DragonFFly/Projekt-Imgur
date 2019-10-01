@@ -1,13 +1,13 @@
 <?php
     include_once './header.php';
 
-$user_id = (int) $_GET['id'];
+$usr_id = (int) $_GET['id'];
 
-$query = "SELECT * FROM users WHERE id = $user_id";
+$query = "SELECT * FROM users WHERE id = $usr_id";
 $result = mysqli_query($link, $query);
 $user = mysqli_fetch_array($result);
 
-$query = "SELECT url FROM images WHERE user_id = $user_id";
+$query = "SELECT url FROM images WHERE user_id = $usr_id";
 $result = mysqli_query($link, $query);
 $image = mysqli_fetch_array($result);
 

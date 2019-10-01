@@ -34,9 +34,8 @@
 								$user_id = $_SESSION['user_id'];
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
                                 $username = mysqli_fetch_array(mysqli_query($link, $query));                                                              
-                                echo '<h3>'.$username['ime'].'</h3><hr>';
+                                echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
                                 echo '<a href="logout.php" class="button alt">Sign Out</a>';
-                                echo '<a href="profile.php" class="button alt">Profile</a>';
                                 echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Search"></form>';
                             }
                             else {

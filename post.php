@@ -26,7 +26,7 @@ echo '<tr><td><img src="'.$image['url'].'"></td></tr>';
 echo '<tr></tr> <tr> <td>'.$post['tocke'].'</td><td>'.$post['ogledi'].'</td> </tr> </table>';
 //-------------------------------------------------------------------------------------------------
 
-echo '<form action="comment_insert.php?post_id='.$post_id.'" method="post"><input type="text" placeholder="Write a comment"></form>'
+echo '<form action="comment_insert.php?id='.$post_id.'" method="post"><input type="text" placeholder="Write a comment"></form>'
 
 
 //komentarji -----------------------------------------------------------------

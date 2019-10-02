@@ -1,4 +1,7 @@
 <?php
+include_once './database.php';
+include_once './session.php';
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -37,6 +40,14 @@ if(isset($_POST["submit"])) {
         echo "File is not an image.";
         $uploadOk = 0;
     }
+}
+$file_upload = $target_dir . $target_file;
+
+if($uploadOK = 1){
+    $query = "UPDATE images SET url = ? WHERE user_id = $user_id";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$target_file]);
+    header("Location: profile.php");
 }
 
 

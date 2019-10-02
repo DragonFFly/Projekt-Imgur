@@ -16,6 +16,9 @@ if(!isset($_SESSION['user_id'])
     header("Location: index.php");
     die();
 }
+else{
+    $user_id = $_SESSION['user_id'];
+}
 
 function isAdmin() {
     $result = false;

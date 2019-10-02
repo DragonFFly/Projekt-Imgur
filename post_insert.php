@@ -30,6 +30,7 @@ if (!empty($title) && !empty($descr) && !empty($file)) {
             
     }
     
+    //--------------------------file upload
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         echo '<a class="button alt">'.$target_file.'</a>';

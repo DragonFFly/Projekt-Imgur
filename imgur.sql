@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 01, 2019 at 11:42 AM
--- Server version: 10.1.39-MariaDB
--- PHP Version: 7.3.5
+-- Gostitelj: 127.0.0.1
+-- Čas nastanka: 02. okt 2019 ob 08.59
+-- Različica strežnika: 10.4.6-MariaDB
+-- Različica PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `imgur`
+-- Zbirka podatkov: `imgur`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktura tabele `comments`
 --
 
 CREATE TABLE `comments` (
@@ -34,13 +34,13 @@ CREATE TABLE `comments` (
   `post_id` int(11) NOT NULL,
   `komentar` text COLLATE utf8_slovenian_ci NOT NULL,
   `tocke` int(11) NOT NULL,
-  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `datum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Struktura tabele `images`
 --
 
 CREATE TABLE `images` (
@@ -51,10 +51,17 @@ CREATE TABLE `images` (
   `url` text COLLATE utf8_slovenian_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+--
+-- Odloži podatke za tabelo `images`
+--
+
+INSERT INTO `images` (`id`, `user_id`, `post_id`, `tag_id`, `url`) VALUES
+(1, 3, NULL, NULL, 'uploads/user.png');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Struktura tabele `posts`
 --
 
 CREATE TABLE `posts` (
@@ -63,14 +70,14 @@ CREATE TABLE `posts` (
   `naslov` varchar(60) COLLATE utf8_slovenian_ci NOT NULL,
   `opis` varchar(40) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `ogledi` int(11) DEFAULT NULL,
-  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `datum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `tocke` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts_tags`
+-- Struktura tabele `posts_tags`
 --
 
 CREATE TABLE `posts_tags` (
@@ -82,7 +89,7 @@ CREATE TABLE `posts_tags` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `saved_posts`
+-- Struktura tabele `saved_posts`
 --
 
 CREATE TABLE `saved_posts` (
@@ -94,7 +101,7 @@ CREATE TABLE `saved_posts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tags`
+-- Struktura tabele `tags`
 --
 
 CREATE TABLE `tags` (
@@ -104,7 +111,7 @@ CREATE TABLE `tags` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 --
--- Dumping data for table `tags`
+-- Odloži podatke za tabelo `tags`
 --
 
 INSERT INTO `tags` (`id`, `naslov`, `opis`) VALUES
@@ -116,7 +123,7 @@ INSERT INTO `tags` (`id`, `naslov`, `opis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktura tabele `users`
 --
 
 CREATE TABLE `users` (
@@ -125,24 +132,24 @@ CREATE TABLE `users` (
   `geslo` varchar(50) COLLATE utf8_slovenian_ci NOT NULL,
   `mail` varchar(40) COLLATE utf8_slovenian_ci NOT NULL,
   `tocke` int(11) DEFAULT NULL,
-  `datum_pridruzitve` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `datum_pridruzitve` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `opis` varchar(80) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `admn` tinyint(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 --
--- Dumping data for table `users`
+-- Odloži podatke za tabelo `users`
 --
 
 INSERT INTO `users` (`id`, `ime`, `geslo`, `mail`, `tocke`, `datum_pridruzitve`, `opis`, `admn`) VALUES
 (3, 'admin', '7fb20f61e7463bfa5eeb031b041b8073f2f70a61', 'admin@admin', 0, '2019-09-11 06:54:36', NULL, 1);
 
 --
--- Indexes for dumped tables
+-- Indeksi zavrženih tabel
 --
 
 --
--- Indexes for table `comments`
+-- Indeksi tabele `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -150,7 +157,7 @@ ALTER TABLE `comments`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `images`
+-- Indeksi tabele `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
@@ -158,20 +165,20 @@ ALTER TABLE `images`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `posts`
+-- Indeksi tabele `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `posts_tags`
+-- Indeksi tabele `posts_tags`
 --
 ALTER TABLE `posts_tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `saved_posts`
+-- Indeksi tabele `saved_posts`
 --
 ALTER TABLE `saved_posts`
   ADD PRIMARY KEY (`id`),
@@ -179,59 +186,59 @@ ALTER TABLE `saved_posts`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `tags`
+-- Indeksi tabele `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeksi tabele `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT zavrženih tabel
 --
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT tabele `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `images`
+-- AUTO_INCREMENT tabele `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT tabele `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `posts_tags`
+-- AUTO_INCREMENT tabele `posts_tags`
 --
 ALTER TABLE `posts_tags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `saved_posts`
+-- AUTO_INCREMENT tabele `saved_posts`
 --
 ALTER TABLE `saved_posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tags`
+-- AUTO_INCREMENT tabele `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT tabele `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

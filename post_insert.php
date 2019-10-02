@@ -29,8 +29,16 @@ if (!empty($title) && !empty($descr) && !empty($file)) {
         $stmt->execute([$file]);
             
     }
-
-    header("Location: new_post.php");
+    
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        echo '<a class="button alt">'.$target_file.'</a>';
+        header("Location: index.php");
+        die();
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+        header("Location: new_post.php");
+    }
 }
 else {
     header("Location: new_post.php");

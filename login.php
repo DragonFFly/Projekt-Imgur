@@ -17,6 +17,8 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
+        $_SESSION['googleUser'] = $googleUser;
+        header("Location: index.php");
       }
     </script>
 

@@ -1,6 +1,13 @@
 <?php
 include_once './header.php';
 
+echo '<h2>Profile picture:</h2><br>'
+.'<form action="imageupdate.php" method="post" enctype="multipart/form-data">'
+.'Select image to upload:'
+.'<input type="file" name="fileToUpload" id="fileToUpload">'
+.'<input type="submit" value="Select Image" name="submit">';
+echo '</form><br>';
+
 echo '<h2>Name:</h2><br>'
 .'<form action="nameupdate.php" method="post">'
 .'<input type = "text" placeholder="Insert new name..." name = "name">'

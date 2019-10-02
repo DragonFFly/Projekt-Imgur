@@ -33,9 +33,23 @@
                             if (isset($_SESSION['user_id'])) {
 								$user_id = $_SESSION['user_id'];
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
-                                $username = mysqli_fetch_array(mysqli_query($link, $query));                                                              
-                                echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
-                                echo '<a href="logout.php" class="button alt">Sign Out</a>';
+                                $username = mysqli_fetch_array(mysqli_query($link, $query));
+								echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
+								if(ISSET($_SESSION['googleUser'])){?>
+									<a href="#" onclick="signOut();">Sign out</a>
+									<script>
+									function signOut() {
+										var auth2 = gapi.auth2.getAuthInstance();
+										auth2.signOut().then(function () {
+										console.log('User signed out.');
+										});
+									}
+									</script>
+								<?php
+								}
+								else{
+								echo '<a href="logout.php" class="button alt">Sign Out</a>';
+								}
                                 echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Search"></form>';
                             }
                             else {

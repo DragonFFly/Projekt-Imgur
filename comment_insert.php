@@ -1,3 +1,14 @@
 <?php
-$post_id = (int)$_GET['id'];
+include_once './session.php';
+include_once './database.php';
 
+$post_id = (int)$_POST['id'];
+$comment = (int)$_POST['comment'];
+
+if (!empty($comment)) {
+    $query = "INSERT INTO comments (user_id,post_id,komentar,tocke) "
+            . "VALUES ($user_id,$post_id,?,0)";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$comment]);
+}
+header("Location: post.php?id=$post_id");

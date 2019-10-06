@@ -11,8 +11,8 @@ $query = "SELECT url FROM images WHERE tag_id = $tag_id";
 $result = mysqli_query($link, $query);
 $image = mysqli_fetch_array($result);
 
-echo '<table>'
-.'<tr><td><img src="'.$image['url'].'"></td><td>'.$tag['ime'].'</td></tr>'
+echo '<table background="'.$image['url'].'">'
+.'<tr><td>'.$tag['ime'].'</td></tr>'
 .'<tr><td>'.$tag['opis'].'</td>';
 
 echo '</table>';

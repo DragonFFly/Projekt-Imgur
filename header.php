@@ -29,6 +29,15 @@
 						<a href="index.php"><img src="images/imgur.png" alt="logo"></a>
 						<a href="new_post.php" class="button alt">New Post</a>
                         <?php
+						//-----------------------------upvote / downvote funkcije
+						function upvote($post_id){
+							
+						}
+						function downvote($post_id){
+
+						}
+						//-----------------------------------
+
                             //če je prijavljen - naj bo link na logout in prikaže ime , če ne login 
                             if (isset($_SESSION['user_id'])) {
 								$user_id = $_SESSION['user_id'];

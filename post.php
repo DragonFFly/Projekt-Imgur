@@ -23,10 +23,17 @@ while($image = mysqli_fetch_array($result)){
 echo '<tr><td><img src="'.$image['url'].'"></td></tr>';
 }
 
-echo '<tr></tr> <tr> <td>'.$post['tocke'].'</td><td>'.$post['ogledi'].'</td> </tr> </table>';
+echo '<tr></tr> <tr> <td><button onclick="upvote()"><img src="images/upvote.png"></button></td> <td>'.$post['tocke'].'</td> <td><button onclick="downvote()"><img src="images/downvote.png"></button></td> <td>'.$post['ogledi'].'</td> </tr> </table>';
 //-------------------------------------------------------------------------------------------------
 
-echo '<form action="comment_insert.php?id='.$post_id.'" method="post"><input type="text" placeholder="Write a comment"></form>'
+echo '<form action="comment_insert.php" method="post"><input type="text" name="comment" placeholder="Write a comment"><input type="hidden" name="post_id" value="'.$post_id.'">';
+if(ISSET($user_id)){
+    echo '<input type="submit" name="submit" value="Post">';
+}
+else{
+    echo 'Login to post a comment';
+}
+echo '</form>';
 
 
 //komentarji -----------------------------------------------------------------

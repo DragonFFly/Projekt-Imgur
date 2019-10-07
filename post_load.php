@@ -4,7 +4,7 @@ if(ISSET($tag_id)){
     $query = "SELECT *  , COUNT(*) as posts FROM posts p INNER JOIN posts_tags r ON p.id = r.post_id WHERE (r.tag_id = $tag_id)";
 }
 else if(ISSET($user)){
-    $query = "SELECT *  , COUNT(*) as posts FROM posts";
+    $query = "SELECT *  , COUNT(*) as posts FROM posts WHERE user_id = $user_id";
 }
 else{
     $query = "SELECT *  , COUNT(*) as posts FROM posts";
@@ -47,7 +47,7 @@ while ($div > 0){ //ponovi za vsak div
         while ($post = mysqli_fetch_array($result)){
             $post_id = $post['id'];
             $query = "SELECT * FROM images WHERE post_id = '$post_id';";
-            echo ' <a href="post.php">';
+            echo ' <a href="post.php?id='.$post_id.'">';
             while ($image = mysqli_fetch_array(mysqli_query($link, $query))){
                 echo '<img src="'.$image['url'].'" alt="" />';
             }

@@ -14,7 +14,7 @@ $query = "SELECT * FROM users u INNER JOIN posts p ON u.id = p.user_id WHERE u.i
 $result2 = mysqli_query($link, $query);
 $user = mysqli_fetch_array($result2); 
 
-echo '<tr><td>by <a href="user.php?id='.$user['id'].'">'.$user['ime'].'</a></td></tr>'
+echo '<tr><td>by <a href="user.php?id='.$user['user_id'].'">'.$user['ime'].'</a></td></tr>';
 
 $query = "SELECT url FROM images WHERE post_id = $post_id";
 $result = mysqli_query($link, $query);
@@ -23,10 +23,11 @@ while($image = mysqli_fetch_array($result)){
 echo '<tr><td><img src="'.$image['url'].'"></td></tr>';
 }
 
-echo '<tr></tr> <tr> <td><button onclick="upvote()"><img src="images/upvote.png"></button></td> <td>'.$post['tocke'].'</td> <td><button onclick="downvote()"><img src="images/downvote.png"></button></td> <td>'.$post['ogledi'].'</td> </tr> </table>';
+echo '<tr></tr> <tr> <td><input type="radio" name="karma" onclick="karmaPost(1,'.$post_id.','.$user['user_id'].')"><img src="images/upvote.png"></button></td> <td>'.$post['tocke'].' points</td> <td><input type="radio" name="karma" onclick="karmaPost(-1)"><img src="images/downvote.png"></button></td> <td>'.$post['ogledi'].' views</td> </tr> </table>';
 //-------------------------------------------------------------------------------------------------
 
-echo '<form action="comment_insert.php" method="post"><input type="text" name="comment" placeholder="Write a comment"><input type="hidden" name="post_id" value="'.$post_id.'">';
+//------------------------------------------vpis komentarja-------------------------------------------------
+echo '<form action="comment_insert.php" method="post"><input type="text" name="comment" placeholder="Write a comment"><input type="hidden" name="post_id" value="'.$post_id.'">';//pošlje komentar in post_id
 if(ISSET($user_id)){
     echo '<input type="submit" name="submit" value="Post">';
 }
@@ -34,7 +35,7 @@ else{
     echo 'Login to post a comment';
 }
 echo '</form>';
-
+//---------------------------------------------------------------------------------------------------------
 
 //komentarji -----------------------------------------------------------------
 $query = "SELECT * FROM comments WHERE post_id = $post_id";
@@ -45,7 +46,7 @@ $user_id = $comment['user_id'];
 $query = "SELECT * FROM users WHERE id = $user_id";
 $result = mysqli_query($link, $query);
 $user = mysqli_fetch_array($result);
-echo '<table><tr><td>'.$user['ime'].'</td><td>'.$comment['tocke'].'</td></tr>'
+echo '<table><tr><td>'.$user['ime'].'</td><td>'.$comment['tocke'].' points</td></tr>'
 .'<tr> <td>'.$comment['komentar'].'</td> </tr> </table>';
 }
 //-----------------------------------------------------------------------------

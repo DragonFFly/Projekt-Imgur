@@ -14,7 +14,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="google-signin-scope" content="profile email">
-    	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    	<meta name="google-signin-client_id" content=" 473203751751-p4rupqocq32p5bha92or96f7gbln9dht.apps.googleusercontent.com .apps.googleusercontent.com">
     	<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
@@ -30,11 +30,8 @@
 						<a href="new_post.php" class="button alt">New Post</a>
                         <?php
 						//-----------------------------upvote / downvote funkcije
-						function upvote($post_id){
-							
-						}
-						function downvote($post_id){
-
+						function karmaPost($value, $post, $user){
+							$query = "UPDATE posts SET tocke = tocke + ($value) WHERE id = $post";
 						}
 						//-----------------------------------
 
@@ -44,7 +41,8 @@
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
                                 $username = mysqli_fetch_array(mysqli_query($link, $query));
 								echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
-								if(ISSET($_SESSION['googleUser'])){?>
+								//---------------------izpis za google login
+								if(ISSET($_SESSION['googleUser'])){?> 
 									<a href="#" onclick="signOut();">Sign out</a>
 									<script>
 									function signOut() {
@@ -55,6 +53,16 @@
 									}
 									</script>
 								<?php
+								//---------------------------------------------
+								
+								//------------------------------facebook login check
+								function checkLoginState() {
+									FB.getLoginStatus(function(response) {
+									  statusChangeCallback(response);
+									});
+								  }
+								
+								//-----------------------------------------------------
 								}
 								else{
 								echo '<a href="logout.php" class="button alt">Sign Out</a>';

@@ -2,7 +2,7 @@
 include_once './session.php';
 include_once './database.php';
 
-$post_id = (int)$_POST['id'];
+$post_id = (int)$_POST['post_id'];
 $comment = (int)$_POST['comment'];
 
 if (!empty($comment)) {

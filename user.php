@@ -12,7 +12,7 @@ $result = mysqli_query($link, $query);
 $image = mysqli_fetch_array($result);
 
 echo '<table>'
-.'<tr><td><img src="'.$image['url'].'"></td><td>'.$user['ime'].'</td><td>'.$user['tocke'].'</td></tr>'
+.'<tr><td><img src="'.$image['url'].'" width=30%></td><td>'.$user['ime'].'</td><td>'.$user['tocke'].' points</td></tr>'
 .'<tr><td>'.$user['opis'].'</td>';
 
 echo '</table>';

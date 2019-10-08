@@ -1,7 +1,7 @@
 <?php //glavna stran 
     include_once './header.php';
 
-    //include_once './post_load.php'
+    include_once './post_load.php'
 ?>
 
     <section class="thumbnails">

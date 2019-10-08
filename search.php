@@ -1,7 +1,6 @@
 <?php
 include_once './header.php';
 $search = $_GET['search'];
-echo $search;
 $query = "SELECT * FROM posts  WHERE naslov LIKE '%$search%' OR opis LIKE '%$search%'";
 $result1 = mysqli_query($link, $query);
 echo '<table>';
@@ -13,9 +12,9 @@ while($post = mysqli_fetch_array($result1)){
         $image1 = mysqli_fetch_array($result2);
 
         echo '<tr><td>Posts</td></tr>'
-        . '<tr><td><a href="post.php?id='.$post_id.'"><img src="'.$image1['url'].'"></a></td>'
-        .'<td>'.$post['naslov'].'</td><td>'.$post['ogledi'].' views</td>'
-        .'<td>'.$post['tocke'].' points</td></tr>';
+        . '<tr><td><a href="post.php?id='.$post_id.'"><img src="'.$image1['url'].'"></a></td></tr>'
+        .'<tr><td>'.$post['naslov'].'</td><td>'.$post['ogledi'].' views</td></tr>'
+        .'<tr><td>'.$post['tocke'].' points</td></tr>';
     }
 //---------------------------------------------------------------------------------
 echo '</table>';
@@ -31,8 +30,8 @@ while($user = mysqli_fetch_array($result1)){
         $image2 = mysqli_fetch_array($result2);
 
         echo '<tr><td>Users</td></tr>'
-        . '<tr><td><a href="user.php?id='.$user_id.'"><img src="'.$image2['url'].'"></a></td>'
-        .'<td>'.$user['ime'].'</td><td>'.$user['tocke'].' points</td></tr>';
+        . '<tr><td><a href="user.php?id='.$user_id.'"><img src="'.$image2['url'].'"></a></td></tr>'
+        .'<tr><td>'.$user['ime'].'</td><td>'.$user['tocke'].' points</td></tr>';
     }
 //---------------------------------------------------------------------------------
 echo '</table>';

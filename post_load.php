@@ -29,17 +29,17 @@ else if ($post_rem == 2){
     $post2 = $post2 + 1;
 }
 
-$div = 1;
+$div = 3;
 while ($div > 0){ //ponovi za vsak div
     echo '<div>';
     if($div == 1){ //izbere število postov v enem div-u
-        $a = $post1;
+        $a = $post3;
     }
     else if($div == 2){
         $a = $post2;
     }
     else if($div == 3){
-        $a = $post3;
+        $a = $post1;
     }
     while($a > 0){//ponovi za vsak post v divu
         
@@ -58,6 +58,6 @@ while ($div > 0){ //ponovi za vsak div
         $a = $a - 1;
     }
     echo '</div>';
-    $div = $div + 1;
+    $div = $div - 1;
 }
 echo ' </section>';

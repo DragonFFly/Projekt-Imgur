@@ -14,7 +14,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="google-signin-scope" content="profile email">
-    	<meta name="google-signin-client_id" content=" 473203751751-p4rupqocq32p5bha92or96f7gbln9dht.apps.googleusercontent.com .apps.googleusercontent.com">
+    	<meta name="google-signin-client_id" content="473203751751-p4rupqocq32p5bha92or96f7gbln9dht.apps.googleusercontent.com">
     	<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
@@ -41,8 +41,8 @@
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
                                 $username = mysqli_fetch_array(mysqli_query($link, $query));
 								echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
-								//---------------------izpis za google login
-								if(ISSET($_SESSION['googleUser'])){?> 
+								//------------------------------google logout
+								if(ISSET($_SESSION['googleUser'])){?>
 									<a href="#" onclick="signOut();">Sign out</a>
 									<script>
 									function signOut() {
@@ -53,16 +53,13 @@
 									}
 									</script>
 								<?php
-								//---------------------------------------------
-								
-								//------------------------------facebook login check
-								function checkLoginState() {
+								//-----------------------------------facebook login
+								/*function checkLoginState() {
 									FB.getLoginStatus(function(response) {
 									  statusChangeCallback(response);
 									});
-								  }
-								
-								//-----------------------------------------------------
+								  }*/
+								//--------------------------------------
 								}
 								else{
 								echo '<a href="logout.php" class="button alt">Sign Out</a>';
@@ -76,6 +73,7 @@
                             }
 
                         ?>
+                        <hr>
 					</header>
 
 				<!-- Main -->

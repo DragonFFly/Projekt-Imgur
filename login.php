@@ -21,8 +21,8 @@
         header("Location: index.php");
       }
     </script>
-
-<script>
+    
+    <script>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '2392399607464353',
@@ -34,7 +34,6 @@
     FB.AppEvents.logPageView();   
       
   };
-
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
@@ -48,6 +47,7 @@
   scope="public_profile,email"
   onlogin="checkLoginState();">
 </fb:login-button>
+
 
 
 <h1>Prijava</h1>

@@ -23,14 +23,17 @@ while($image = mysqli_fetch_array($result)){
 echo '<tr><td><img src="'.$image['url'].'"></td></tr>';
 }
 
-echo '<tr></tr> <tr> <td><button onclick="karmaPost(1,'.$post_id.','.$user['user_id'].')" width= 5%><img src="images/upvote.png" width = 5%></button></td>' 
-    . '<td>'.$post['tocke'].' points</td> '
-    . '<td><button onclick="karmaPost(-1)" width= 5%><img src="images/downvote.png" width = 5%></button></td>' 
+echo '<tr><td>'.$post['opis'].'</td></tr> <tr> <td><button onclick="karmaPost(1,'.$post_id.','.$user['user_id'].')" width=2%><img src="images/upvote.png" width=5%></button>' 
+    . ' '.$post['tocke'].' points '
+    . '<button onclick="karmaPost(-1,'.$post_id.','.$user['user_id'].')" width= 2%><img src="images/downvote.png" width=5%></button></td>' 
     . '<td>'.$post['ogledi'].' views</td> </tr> </table>';
 //-------------------------------------------------------------------------------------------------
 
 //------------------------------------------vpis komentarja-------------------------------------------------
-echo '<form action="comment_insert.php" method="post"><input type="text" name="comment" placeholder="Write a comment"><input type="hidden" name="post_id" value="'.$post_id.'">';//pošlje komentar in post_id
+echo '<form action="comment_insert.php" method="post">'
+    .'<input type="text" name="comment" placeholder="Write a comment">'
+    .'<input type="hidden" name="post_id" id="post_id" value="'.$post_id.'">';//pošlje komentar in post_id
+
 if(ISSET($user_id)){//uporabnik lahko komentira samo če je vpisan
     echo '<input type="submit" name="submit" value="Post">';
 }

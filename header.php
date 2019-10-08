@@ -27,11 +27,23 @@
 					<header id="header">
                         
 						<a href="index.php"><img src="images/imgur.png" alt="logo"></a>
-						<a href="new_post.php" class="button alt">New Post</a>
+						<a href="post_upload.php" class="button alt">New Post</a>
                         <?php
 						//-----------------------------upvote / downvote funkcije
 						function karmaPost($value, $post, $user){
 							$query = "UPDATE posts SET tocke = tocke + ($value) WHERE id = $post";
+							mysqli_query($link, $query);
+							
+							$query = "UPDATE users SET tocke = tocke + ($value) WHERE id = $user";
+							mysqli_query($link, $query);
+						}
+						
+						function karmaComment($value, $comment, $user){
+							$query = "UPDATE comments SET tocke = tocke + ($value) WHERE id = $comment";
+							mysqli_query($link, $query);
+							
+							$query = "UPDATE users SET tocke = tocke + ($value) WHERE id = $user";
+							mysqli_query($link, $query);
 						}
 						//-----------------------------------
 

@@ -12,7 +12,7 @@ while($post = mysqli_fetch_array($result1)){
         $image1 = mysqli_fetch_array($result2);
 
         echo '<tr><td>Posts</td></tr>'
-        . '<tr><td><a href="post.php?id='.$post_id.'"><img src="'.$image1['url'].'"></a></td></tr>'
+        . '<tr><td><a href="post.php?id='.$post_id.'"><img src="'.$image1['url'].'" width=50%></a></td></tr>'
         .'<tr><td>'.$post['naslov'].'</td><td>'.$post['ogledi'].' views</td></tr>'
         .'<tr><td>'.$post['tocke'].' points</td></tr>';
     }
@@ -30,7 +30,7 @@ while($user = mysqli_fetch_array($result1)){
         $image2 = mysqli_fetch_array($result2);
 
         echo '<tr><td>Users</td></tr>'
-        . '<tr><td><a href="user.php?id='.$user_id.'"><img src="'.$image2['url'].'"></a></td></tr>'
+        . '<tr><td><a href="user.php?id='.$user_id.'"><img src="'.$image2['url'].'" width=30%></a></td></tr>'
         .'<tr><td>'.$user['ime'].'</td><td>'.$user['tocke'].' points</td></tr>';
     }
 //---------------------------------------------------------------------------------

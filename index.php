@@ -4,6 +4,7 @@
     include_once './post_load.php'
 ?>
 
+
     <section class="thumbnails">
         <div>
             <a href="images/fulls/01.jpg">

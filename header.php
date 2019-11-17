@@ -14,8 +14,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="google-signin-scope" content="profile email">
-    	<meta name="google-signin-client_id" content="473203751751-p4rupqocq32p5bha92or96f7gbln9dht.apps.googleusercontent.com">
-    	<script src="https://apis.google.com/js/platform.js" async defer></script>
+    	<meta name="google-signin-client_id" content="473203751751-78uiv64k63mm0vj1o6samb1s1p9skor2.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
@@ -28,6 +28,32 @@
                         
 						<a href="index.php"><img src="images/imgur.png" alt="logo"></a>
 						<a href="post_upload.php" class="button alt">New Post</a>
+						<a href="#" onclick="signOut();">Sign out</a>
+									<script>
+									function signOut() {
+										var auth2 = gapi.auth2.getAuthInstance();
+										auth2.signOut().then(function () {
+										console.log('User signed out.');
+										});
+									}
+									</script>
+									
+						<script>
+                          function onSignIn(googleUser) {
+                            // Useful data for your client-side scripts:
+                            var profile = googleUser.getBasicProfile();
+                            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                            console.log('Full Name: ' + profile.getName());
+                            console.log('Given Name: ' + profile.getGivenName());
+                            console.log('Family Name: ' + profile.getFamilyName());
+                            console.log("Image URL: " + profile.getImageUrl());
+                            console.log("Email: " + profile.getEmail());
+                    
+                            // The ID token you need to pass to your backend:
+                            var id_token = googleUser.getAuthResponse().id_token;
+                            console.log("ID Token: " + id_token);
+                          }
+                        </script>
                         <?php
 						//-----------------------------upvote / downvote funkcije
 						function karmaPost($value, $post, $user){
@@ -53,29 +79,7 @@
                                 $query = "SELECT ime FROM users WHERE id = $user_id";
                                 $username = mysqli_fetch_array(mysqli_query($link, $query));
 								echo '<a href="profile.php"><h3>'.$username['ime'].'</h3><a><hr>';
-								//------------------------------google logout
-								if(ISSET($_SESSION['googleUser'])){?>
-									<a href="#" onclick="signOut();">Sign out</a>
-									<script>
-									function signOut() {
-										var auth2 = gapi.auth2.getAuthInstance();
-										auth2.signOut().then(function () {
-										console.log('User signed out.');
-										});
-									}
-									</script>
-								<?php
-								//-----------------------------------facebook login
-								/*function checkLoginState() {
-									FB.getLoginStatus(function(response) {
-									  statusChangeCallback(response);
-									});
-								  }*/
-								//--------------------------------------
-								}
-								else{
 								echo '<a href="logout.php" class="button alt">Sign Out</a>';
-								}
                                 echo '<form action="search.php" method="get"><input type="text" name="search" placeholder="Images, #tags, @users oh my!" width=80%> <input type="Submit" value="Search"></form>';
                             }
                             else {

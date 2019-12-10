@@ -75,14 +75,9 @@
                               $google_account_info = $google_oauth->userinfo->get();
                               $email =  $google_account_info->email;
                               $name =  $google_account_info->name;
-                             
-                             
-                             $_SESSION('googleUser') = true;
-                             $_SESSION('email') = $email;
-                             $_SESSION('name') = $name;
-                             
+							  
                               // now you can use this profile info to create account in your website and make user logged in.
-                              header("Location:index.php");
+                              header("Location:googlesession.php");
                             }
                         }
                         

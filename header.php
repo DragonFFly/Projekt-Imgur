@@ -28,17 +28,66 @@
                         
 						<a href="index.php"><img src="images/imgur.png" alt="logo"></a>
 						<a href="post_upload.php" class="button alt">New Post</a>
-						<a href="#" onclick="signOut();">Sign out</a>
-									<script>
-									function signOut() {
-										var auth2 = gapi.auth2.getAuthInstance();
-										auth2.signOut().then(function () {
-										console.log('User signed out.');
-										});
-									}
-									</script>
-									
+						<?php
+						if($_SESSION('googleUser') == true){
+						?><a href="#" onclick="signOut();">Sign out</a><?php
+						}
+						
+						
+						//google signIn in signOut
+						?>
 						<script>
+						function signOut() {
+							var auth2 = gapi.auth2.getAuthInstance();
+							auth2.signOut();
+							<?php
+							session_destroy();
+							?>
+						}
+						</script>
+						
+                        <?php
+                        
+                        function onSignIn($googleUser){
+                            require_once 'google-api-lib/vendor/autoload.php';
+                            // init configuration
+                            $clientID = '473203751751-78uiv64k63mm0vj1o6samb1s1p9skor2.apps.googleusercontent.com';
+                            $clientSecret = '5xCJTt8rYcm5lwaVggtzUPpm';
+                            $redirectUri = 'http://tkdomain.eu';
+                              
+                            // create Client Request to access Google API
+                            $client = new Google_Client();
+                            
+                            $client->setClientId($clientID);
+                            $client->setClientSecret($clientSecret);
+                            $client->setRedirectUri($redirectUri);
+                            $client->addScope("email");
+                            $client->addScope("profile");
+                            
+                            session_start();
+                            
+                            if (isset($_GET['code'])) {
+                              $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                              $client->setAccessToken($token['access_token']);
+                              
+                              // get profile info
+                              $google_oauth = new Google_Service_Oauth2($client);
+                              $google_account_info = $google_oauth->userinfo->get();
+                              $email =  $google_account_info->email;
+                              $name =  $google_account_info->name;
+                             
+                             
+                             $_SESSION('googleUser') = true;
+                             $_SESSION('email') = $email;
+                             $_SESSION('name') = $name;
+                             
+                              // now you can use this profile info to create account in your website and make user logged in.
+                              header("Location:index.php");
+                            }
+                        }
+                        
+                        /*
+                        <script>
                           function onSignIn(googleUser) {
                             // Useful data for your client-side scripts:
                             var profile = googleUser.getBasicProfile();
@@ -53,8 +102,8 @@
                             var id_token = googleUser.getAuthResponse().id_token;
                             console.log("ID Token: " + id_token);
                           }
-                        </script>
-                        <?php
+                        </script>*/
+                        
 						//-----------------------------upvote / downvote funkcije
 						function karmaPost($value, $post, $user){
 							$query = "UPDATE posts SET tocke = tocke + ($value) WHERE id = $post";

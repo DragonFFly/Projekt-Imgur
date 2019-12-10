@@ -1,9 +1,11 @@
 <?php
     include_once './header.php';
+
+
+//<a href="google_login.php">Google Login</a>
 ?>
 
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-
 <h1>Prijava</h1>
 
 <form action="login_check.php" method="post">
